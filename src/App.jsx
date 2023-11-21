@@ -1,13 +1,15 @@
+import { NextUIProvider } from '@nextui-org/react'
 import './App.css'
+import HomePage from './pages/HomePage'
 
 function App() {
   
-
   return (
     <>
-      <h1 className="text-3xl font-bold underline text-center">
-        Project Start
-      </h1>
+     <NextUIProvider>
+      <HomePage />
+     </NextUIProvider>
+      
     </>
   )
 }
