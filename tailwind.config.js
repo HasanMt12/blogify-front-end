@@ -9,6 +9,10 @@ export default {
   theme: {
     extend: {},
   },
+  fontFamily: {
+      'merriweather': ['Merriweather', 'serif'],
+      'opensans': ['Open Sans', 'sans-serif'],
+  },
   plugins: [nextui()]
 }
 

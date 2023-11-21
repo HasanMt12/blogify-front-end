@@ -1,37 +1,54 @@
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem} from "@nextui-org/react";
 import { images } from "../constants";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, Avatar} from "@nextui-org/react";
 import { FiEdit } from 'react-icons/fi';
 
-
 const Header =  () => {
+  const menuItems = [
+    "blogs",
+    "articles",
+    "FAQ",
+    "Help & Feedback",
+    "Log Out",
+  ];
 
-
-    return (
-    <Navbar className="bg-transparent rounded-lg" justify="start">
-     
-      <NavbarBrand  justify="start" className="">
-        <img src={images.Logo}></img>
-      </NavbarBrand>
-    
-
-      <NavbarContent className="hidden sm:flex gap-4 hover:text-cyan-600 font-merriweather" justify="center">
-        <NavbarItem>
-           blog
-        </NavbarItem>
-      
+  return (
+    <Navbar  className="bg-transparent rounded-lg font-opensans ">
+      <NavbarContent className="sm:hidden" justify="start">
+        <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarContent as="div" justify="end">
-       
-          <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
+      <NavbarContent className="sm:hidden pr-3" justify="start">
+        <NavbarBrand>
+           <img src={images.Logo}></img>
+        </NavbarBrand>
+      </NavbarContent>
+
+      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+        <NavbarBrand>
+           <img src={images.Logo}></img>
+        </NavbarBrand>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            Blogs
+          </Link>
+        </NavbarItem>
+        <NavbarItem isActive>
+          <Link href="#" aria-current="page" color="warning">
+            Articles
+          </Link>
+        </NavbarItem>
+        <NavbarItem>
+          <Link color="foreground" href="#">
+            FAQ
+          </Link>
+        </NavbarItem>
+      </NavbarContent>
+
+      <NavbarContent justify="end">
+        <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
             <FiEdit /> write
-              </NavbarItem>
-          
-  
-       
-          Login
-      
-          <Dropdown placement="bottom-end">
+         </NavbarItem>
+         <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -52,13 +69,26 @@ const Header =  () => {
             </DropdownItem>
           </DropdownMenu>
         </Dropdown>
-     
-        
-        
       </NavbarContent>
-      
+
+      <NavbarMenu>
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              className="w-full"
+              color={
+                index === 2 ? "warning" : index === menuItems.length - 1 ? "danger" : "foreground"
+              }
+              href="#"
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
     </Navbar>
   );
-};
+}
 
 export default Header;

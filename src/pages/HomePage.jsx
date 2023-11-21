@@ -1,8 +1,11 @@
 import MainLayout from "../components/MainLayout";
+import Hero from "./Container/Hero";
 
 const HomePage = () => {
     return (
-       <MainLayout />
+       <MainLayout>
+            <Hero></Hero>
+       </MainLayout>
     );
 };
 
