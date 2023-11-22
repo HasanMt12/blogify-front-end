@@ -1,5 +1,6 @@
 import Breadcrumbs from "../../components/Breadcrumbs";
 import MainLayout from "../../components/MainLayout";
+import SocialShareButtons from "../../components/SocialMediaButton";
 import { images } from "../../constants";
 import RelatedPosts from "./Container/RelatedPosts";
 
@@ -52,10 +53,10 @@ const BlogDetailsPage = () => {
               <h2 className="font-roboto font-medium text-dark-hard mb-4 md:text-xl">
                 Share on:
               </h2>
-              {/* <SocialShareButtons
+              <SocialShareButtons
                 url={encodeURI(window.location.href)}
-                title={encodeURIComponent(data?.title)}
-              /> */}
+                title={encodeURIComponent("data?.title")}
+              />
             </div>
           </div>
             </section>
