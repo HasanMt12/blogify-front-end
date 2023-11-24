@@ -83,8 +83,8 @@ const Header =  () => {
             </DropdownMenu>
           </Dropdown>):(
             <NavbarItem>
-            <Link to="/register" color="foreground" >
-              register
+            <Link to="/login" color="foreground" >
+              Login
             </Link>
           </NavbarItem>
           )}
