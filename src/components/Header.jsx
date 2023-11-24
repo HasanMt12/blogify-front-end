@@ -2,8 +2,15 @@ import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuIt
 import { images } from "../constants";
 import {Link} from "react-router-dom"
 import { FiEdit } from 'react-icons/fi';
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/actions/userLogout.js";
 
 const Header =  () => {
+  // Redux hooks for dispatch and selecting user state
+  const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
+
+  // Array of menu items for the additional dropdown
   const menuItems = [
     "blogs",
     "articles",
@@ -11,6 +18,11 @@ const Header =  () => {
     "Help & Feedback",
     "Log Out",
   ];
+  
+  // Logout handler dispatches the logout action
+   const logoutHandler = () => {
+   dispatch(logout());
+  };
 
   return (
     <Navbar  className="bg-transparent rounded-lg font-opensans ">
@@ -49,7 +61,7 @@ const Header =  () => {
         <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
             <FiEdit /> write
          </NavbarItem>
-         <Dropdown placement="bottom-end">
+         {userState?.userInfo?( <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
               isBordered
@@ -59,17 +71,24 @@ const Header =  () => {
             
             />
           </DropdownTrigger>
-          <DropdownMenu aria-label="Profile Actions" variant="flat">
-            <DropdownItem key="profile" className="h-14 gap-2">
-            <p className="font-semibold">Signed in as</p>
-            <p className="font-semibold text-cyan-600">sample email</p>           
-            </DropdownItem>
-            <DropdownItem key="settings">My Settings</DropdownItem>
-            <DropdownItem key="logout" color="danger">
-              Log Out
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
+            <DropdownMenu aria-label="Profile Actions" variant="flat">
+              <DropdownItem key="profile" className="h-14 gap-2">
+              <p className="font-semibold">Signed in as</p>
+              <p className="font-semibold text-cyan-600">{userState?.userInfo.email}</p>           
+              </DropdownItem>
+              <DropdownItem key="settings">Dashboard</DropdownItem>
+              <DropdownItem   onClick={logoutHandler} key="logout" color="danger">
+                Log Out
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>):(
+            <NavbarItem>
+            <Link to="/register" color="foreground" >
+              register
+            </Link>
+          </NavbarItem>
+          )}
+        
       </NavbarContent>
 
       <NavbarMenu>
