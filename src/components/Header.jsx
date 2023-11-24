@@ -1,5 +1,6 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem} from "@nextui-org/react";
 import { images } from "../constants";
+import {Link} from "react-router-dom"
 import { FiEdit } from 'react-icons/fi';
 
 const Header =  () => {
@@ -28,7 +29,7 @@ const Header =  () => {
            <img src={images.Logo}></img>
         </NavbarBrand>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link to="/" color="foreground" href="#">
             Blogs
           </Link>
         </NavbarItem>
@@ -38,8 +39,8 @@ const Header =  () => {
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
-            FAQ
+          <Link to="/register" color="foreground" >
+            register
           </Link>
         </NavbarItem>
       </NavbarContent>
