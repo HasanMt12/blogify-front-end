@@ -36,3 +36,60 @@ export const login = async ({ email, password }) => {
   }
 };
 
+//
+//  Retrieve user profile information by sending a GET request to the "serverAPI/api/users/profile" endpoint.
+//
+
+export const getUserProfile = async ({ token }) => {
+  try {
+    // Set up the request configuration with the authorization token.
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    // Send a GET request to retrieve the user profile information.
+    const { data } = await axios.get("http://localhost:5000/api/users/profile", config);
+
+    // Return the user profile data.
+    return data;
+  } catch (error) {
+    // If the request fails, handle errors and throw appropriate messages.
+    if (error.response && error.response.data.message) {
+      throw new Error(error.response.data.message);
+    } else {
+      throw new Error(error.message);
+    }
+  }
+};
+
+
+//  
+// Update user profile information by sending a PUT request to the "serverAPI/api/users/updateProfile" endpoint.
+// 
+
+export const updateProfile = async ({ token, userData }) => {
+  try {
+    // Set up the request configuration with the authorization token.
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+ // Send a PUT request to update the user profile with the provided data.
+    const { data } = await axios.put(
+      "http://localhost:5000/api/users/updateProfile",
+      userData,
+      config
+    );
+   // Return the updated user data.
+    return data;
+  } catch (error) {
+    // If the request fails, handle errors and throw appropriate messages.
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+

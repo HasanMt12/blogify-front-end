@@ -76,7 +76,7 @@ const Header =  () => {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold text-cyan-600">{userState?.userInfo.email}</p>           
               </DropdownItem>
-              <DropdownItem key="settings">Dashboard</DropdownItem>
+              <DropdownItem> <Link to="/user-profile">My profile</Link> </DropdownItem>
               <DropdownItem   onClick={logoutHandler} key="logout" color="danger">
                 Log Out
               </DropdownItem>
