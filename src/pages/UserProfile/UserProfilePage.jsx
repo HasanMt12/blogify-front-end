@@ -8,6 +8,8 @@ import { getUserProfile, updateProfile } from "../../services/index/users.js";
 import { userActions } from "../../store/reducers/userReducer.js";
 import { toast } from "react-hot-toast";
 import { useMemo } from "react";
+import UserProfilePicture from "../../components/UserProfilePicture.jsx";
+
 
 const UserProfilePage = () => {
   const navigate = useNavigate();
@@ -71,12 +73,12 @@ console.log(userState)
     const { name, email, password } = data;
     mutate({ name, email, password });
   };
-
+console.log(profileData?.avatar)
   return (
-    <MainLayout>
+     <MainLayout>
       <section className="container mx-auto px-5 py-10">
         <div className="w-full max-w-sm mx-auto">
-        
+          <UserProfilePicture avatar={profileData?.avatar} />
           <form onSubmit={handleSubmit(submitHandler)}>
             <div className="flex flex-col mb-6 w-full">
               <label
@@ -171,6 +173,7 @@ console.log(userState)
               Update
             </button>
           </form>
+          
         </div>
       </section>
     </MainLayout>
