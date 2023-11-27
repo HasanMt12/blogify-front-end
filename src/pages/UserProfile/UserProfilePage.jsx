@@ -17,6 +17,7 @@ const UserProfilePage = () => {
   const queryClient = useQueryClient();
   const userState = useSelector((state) => state.user);
 console.log(userState)
+
   const { data: profileData, isLoading: profileIsLoading } = useQuery({
     queryFn: () => {
       return getUserProfile({ token: userState.userInfo.token });
@@ -73,7 +74,8 @@ console.log(userState)
     const { name, email, password } = data;
     mutate({ name, email, password });
   };
-console.log(profileData?.avatar)
+console.log(profileData?.avatar,"user")
+
   return (
      <MainLayout>
       <section className="container mx-auto px-5 py-10">

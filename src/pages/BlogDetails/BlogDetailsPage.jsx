@@ -14,12 +14,14 @@ import BlogsErrorMessage from "../../components/ErrorMessage/BlogsErrorMessage";
 import parseJsonToHtml from "../../utils/parsJsonToHtml.js";
 import BlogDetailSkeleton from "./BlogSetailsKeleton";
 import RelatedPosts from "./Container/RelatedPosts.jsx";
+import CommentsContainer from "../../components/comments/CommentsContainer.jsx";
+import { useSelector } from "react-redux";
 
 const blogDetailsPage = () => {
   const { slug } = useParams();
   const [breadCrumbsData, setbreadCrumbsData] = useState([]);
   const [body, setBody] = useState(null);
-
+  const userState = useSelector((state) => state.user);
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getSinglePost({ slug }),
     queryKey: ["blog", slug],
@@ -47,8 +49,8 @@ const blogDetailsPage = () => {
             <img
               className="rounded-xl w-full"
               src={
-                // data?.photo
-                //   ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo:
+                data?.photo
+                  ? stables.UPLOAD_FOLDER_BASE_URL + data?.photo:
                    images.sampleBlogImage
               }
               alt={data?.title}
@@ -60,6 +62,12 @@ const blogDetailsPage = () => {
             <div>
               {body}
             </div>
+             <CommentsContainer
+              comments={data?.comments}
+              className="mt-10"
+              logginedUserId={userState?.userInfo?._id}
+              postSlug={slug}
+            />
           </article>
           <div>
               <RelatedPosts></RelatedPosts>

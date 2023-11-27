@@ -5,7 +5,7 @@ import { BsCheckLg } from "react-icons/bs";
 import { AiOutlineClose } from "react-icons/ai";
 
 const BlogCard = ({data}) => {
-console.log(data.photo)
+console.log(data.photo, "this is ")
   return (
     
      <div
@@ -14,7 +14,11 @@ console.log(data.photo)
      <div className="relative">
           <Link to={`/blog/${data.slug}`}>
                     <img className="w-full object-cover object-center h-auto md:h-52 lg:h-[11rem] xl:h-[14rem]"
-                        src={images.sampleBlogImage}
+                        src={
+                          data.photo
+                          ? stables.UPLOAD_FOLDER_BASE_URL + data.photo
+                          : images.sampleBlogImage
+                        }
                         alt="Sunset in the mountains"/>
                     <div
                         className="group-hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
