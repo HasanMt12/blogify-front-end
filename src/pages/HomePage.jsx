@@ -5,11 +5,11 @@ import Hero from "./Container/Hero";
 const HomePage = () => {
     return (
        <MainLayout>
-        <div className="w-11/12 mx-auto">
+        <div className="w-11/12 mx-auto ">
              <Hero />
-            <div className="flex gap-12">
-                <Blogs /> 
-                <div className="flex-[1] bg-gray-400 max-h-screen"></div>
+            <div className="flex gap-6">
+                <Blogs  /> 
+                <div className="flex-[1.5] bg-gray-400 ">ok</div>
             </div>
         </div>
            

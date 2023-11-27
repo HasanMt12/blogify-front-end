@@ -2,7 +2,7 @@ import { images } from "../../constants";
 
 const Hero = () => {
     return (
-            <div className=" relative overflow-hidden pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40">
+            <div className=" relative overflow-hidden pb-12 pt-20 sm:pb-16 sm:pt-32 lg:pb-24 xl:pb-32 xl:pt-40 ">
       <div className="relative z-10">
         <div
             className="absolute inset-x-0 top-1/2 -z-10 flex -translate-y-1/2 justify-center overflow-hidden [mask-image:radial-gradient(50%_45%_at_50%_55%,white,transparent)]">
@@ -29,7 +29,7 @@ const Hero = () => {
       </h1>
       <div className={`flex items-center gap-12 lg:mt-14 md:mt-10 mt-7`}>
         <div className="flex-1 h-[400px] relative lg:block hidden ">
-          <img src={images.HeroPhoto}  alt="" className="object-cover z-20" />
+          <img src={images.HeroPhoto}  alt="" className="object-cover z-20 max-h-[360px]" />
         </div>
         <div className="flex flex-1 flex-col gap-2">
           <h1 className="lg:text-[2.2rem] md:text-[1.2rem] text-[0.8rem]">Our platform, Collaborative Mindspace, welcomes all voices.</h1>

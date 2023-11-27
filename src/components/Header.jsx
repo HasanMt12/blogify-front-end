@@ -25,7 +25,8 @@ const Header =  () => {
   };
 
   return (
-    <Navbar  className="bg-transparent rounded-lg font-opensans ">
+  
+    <Navbar  className="bg-transparent rounded-lg font-opensans " >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
@@ -36,7 +37,7 @@ const Header =  () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
+      <NavbarContent className="hidden sm:flex gap-4 -ml-20" justify="start">
         <NavbarBrand>
           <Link to="/"> <img src={images.Logo} className="max-w-[40px] max-h-[40px]" alt="mind Space" title="Mind Space - Home"></img></Link>
         </NavbarBrand>
@@ -57,7 +58,7 @@ const Header =  () => {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent justify="end">
+      <NavbarContent className="-mr-20" justify="end">
         <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
             <FiEdit /> write
          </NavbarItem>
@@ -108,6 +109,7 @@ const Header =  () => {
         ))}
       </NavbarMenu>
     </Navbar>
+   
   );
 }
 
