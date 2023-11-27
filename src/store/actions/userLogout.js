@@ -1,4 +1,4 @@
-import { userActions } from "../reducers/userReducer";
+import { userActions } from "../reducers/userReducer.js";
 
 // Action creator for user logout
 export const logout = () => (dispatch) => {

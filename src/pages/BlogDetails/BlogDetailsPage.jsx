@@ -35,12 +35,7 @@ const BlogDetailsPage = () => {
             <div className="w-full">
              error
             </div>
-            {/* <CommentsContainer
-              comments={data?.comments}
-              className="mt-10"
-              logginedUserId={userState?.userInfo?._id}
-              postSlug={slug}
-            /> */}
+            
           </article>
           <div>
             <RelatedPosts

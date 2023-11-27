@@ -32,13 +32,13 @@ const Header =  () => {
 
       <NavbarContent className="sm:hidden pr-3" justify="start">
         <NavbarBrand>
-           <img src={images.Logo}></img>
+          <Link to="/"> <img src={images.Logo} className="max-w-[34px] max-h-[34px]" alt="mind Space" title="Mind Space - Home"></img></Link>
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarBrand>
-           <img src={images.Logo}></img>
+          <Link to="/"> <img src={images.Logo} className="max-w-[40px] max-h-[40px]" alt="mind Space" title="Mind Space - Home"></img></Link>
         </NavbarBrand>
         <NavbarItem>
           <Link to="/" color="foreground" href="#">
