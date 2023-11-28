@@ -74,7 +74,7 @@ console.log(userState)
     const { name, email, password } = data;
     mutate({ name, email, password });
   };
-console.log(profileData?.avatar,"user")
+
 
   return (
      <MainLayout>

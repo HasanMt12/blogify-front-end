@@ -43,7 +43,7 @@ const blogDetailsPage = () => {
   // Assuming postsData is an array of posts
 const limitedBlogs = BlogsData?.slice(0, 4);
 
-console.log("tags", data.tags)
+console.log("tags", data?.tags )
   return (
     <MainLayout>
       {isLoading ? (
@@ -84,7 +84,7 @@ console.log("tags", data.tags)
           <div>
               <RelatedPosts
                   blogs={limitedBlogs}
-                  tags={data?.tags}
+                  tagsData={data?.tags}
                   className="mt-8 lg:mt-0 lg:max-w-xs"
               ></RelatedPosts>
             <div className="mt-7">

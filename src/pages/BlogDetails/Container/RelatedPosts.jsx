@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { images, stables } from "../../../constants";
 
-const RelatedPosts = ({blogs = [], tags}) => {
+const RelatedPosts = ({blogs = [], tagsData}) => {
   console.log(blogs)
   return (
     <div
@@ -46,13 +46,13 @@ const RelatedPosts = ({blogs = [], tags}) => {
         Tags
       </h2>
      
-       {tags.length === 0 ? (
+       {tagsData?.length === 0 ? (
         <p className="text-slate-500 text-xs mt-2">
           There is not tags for this post
         </p>
       ) : (
         <div className="flex flex-wrap gap-x-2 gap-y-2 mt-4">
-          {tags.map((item, index) => (
+          {tagsData?.map((item, index) => (
             <Link
               key={index}
               to="/"

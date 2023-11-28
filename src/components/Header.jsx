@@ -4,12 +4,13 @@ import {Link} from "react-router-dom"
 import { FiEdit } from 'react-icons/fi';
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/actions/userLogout.js";
+import { useEffect, useState } from "react";
 
 const Header =  () => {
   // Redux hooks for dispatch and selecting user state
   const dispatch = useDispatch();
   const userState = useSelector((state) => state.user);
-
+const [isAdmin, setIsAdmin] = useState(false);
   // Array of menu items for the additional dropdown
   const menuItems = [
     "blogs",
@@ -23,7 +24,15 @@ const Header =  () => {
    const logoutHandler = () => {
    dispatch(logout());
   };
-
+useEffect(() => {
+    // Check if the user is an admin after the initial render
+    if (userState?.userInfo?.admin === true) {
+      setIsAdmin(true);
+      console.log('User is an admin');
+    }
+  }, [userState]);
+      console.log(isAdmin)
+      console.log(userState?.userInfo)
   return (
   
     <Navbar  className="bg-transparent rounded-lg font-opensans " >
@@ -61,7 +70,8 @@ const Header =  () => {
       <NavbarContent className="-mr-20" justify="end">
         <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
             <FiEdit /> write
-         </NavbarItem>
+         </NavbarItem> 
+        
          {userState?.userInfo?( <Dropdown placement="bottom-end">
           <DropdownTrigger>
             <Avatar
@@ -77,6 +87,9 @@ const Header =  () => {
               <p className="font-semibold">Signed in as</p>
               <p className="font-semibold text-cyan-600">{userState?.userInfo.email}</p>           
               </DropdownItem>
+               {isAdmin ? 
+               ( <DropdownItem> <Link to="/admin">Admin Dashboard</Link> </DropdownItem>):
+               ""}
               <DropdownItem> <Link to="/user-profile">My profile</Link> </DropdownItem>
               <DropdownItem   onClick={logoutHandler} key="logout" color="danger">
                 Log Out
