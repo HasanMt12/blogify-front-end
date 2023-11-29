@@ -41,8 +41,8 @@ const blogDetailsPage = () => {
     queryKey: ["posts"],
   });
   // Assuming postsData is an array of posts
-const limitedBlogs = BlogsData?.slice(0, 4);
-
+const limitedBlogs = BlogsData?.data.slice(0, 4);
+console.log(limitedBlogs)
 console.log("tags", data?.tags )
   return (
     <MainLayout>

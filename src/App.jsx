@@ -9,8 +9,8 @@ import LoginPage from './pages/AuthPages/register/LoginPage'
 import UserProfilePage from './pages/UserProfile/UserProfilePage'
 import AdminLayout from './pages/AdminDashboard/AdminLayout'
 import DashboardHome from './pages/AdminDashboard/components/DashboardPages/Dashboardhome'
-import Posts from './pages/AdminDashboard/components/DashboardPages/Posts'
 import Users from './pages/AdminDashboard/components/DashboardPages/Users'
+import ManagePosts from './pages/AdminDashboard/components/DashboardPages/Posts/ManagePosts'
 function App() {
   
   return (
@@ -25,7 +25,7 @@ function App() {
 
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<DashboardHome />} />
-            <Route path="posts" element={<Posts />} />
+            <Route path="posts/manage" element={<ManagePosts />} />
             <Route path="users" element={<Users />} />
            
           </Route>

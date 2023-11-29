@@ -32,7 +32,7 @@ const Blogs = () => {
         ) : isError ? (
           <BlogsErrorMessage message="Couldn't fetch the posts data" />
         ) : (
-          posts?.map((post) => (
+          posts?.data.map((post) => (
             <BlogCard
               key={post.id} data={post} 
             />
