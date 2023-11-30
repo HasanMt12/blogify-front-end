@@ -6,13 +6,16 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
     const { data, headers } = await axios.get(
       `http://localhost:5000/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
+    console.log("headers",headers)
     return { data, headers };
+    
   } catch (error) {
     if (error.response && error.response.data.message)
       throw new Error(error.response.data.message);
     throw new Error(error.message);
   }
 };
+
 
 /**
  * Fetches a single blog post based on its slug.
@@ -30,6 +33,23 @@ export const getSinglePost = async ({ slug }) => {
   }
 };
 
+export const updatePost = async ({ updatedData, slug, token }) => {
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const { data } = await axios.put(`http://localhost:5000/api/posts/${slug}`, updatedData, config);
+    return data;
+  } catch (error) {
+    if (error.response && error.response.data.message)
+      throw new Error(error.response.data.message);
+    throw new Error(error.message);
+  }
+};
+
 
 export const deletePost = async ({ slug, token }) => {
   try {
@@ -39,7 +59,7 @@ export const deletePost = async ({ slug, token }) => {
       },
     };
 
-    const { data } = await axios.delete(`/api/posts/${slug}`, config);
+    const { data } = await axios.delete(`http://localhost:5000/api/posts/${slug}`, config);
     return data;
   } catch (error) {
     if (error.response && error.response.data.message)

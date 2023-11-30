@@ -16,6 +16,7 @@ import BlogDetailSkeleton from "./BlogSetailsKeleton";
 import RelatedPosts from "./Container/RelatedPosts.jsx";
 import CommentsContainer from "../../components/comments/CommentsContainer.jsx";
 import { useSelector } from "react-redux";
+import Editor from "../../components/TextEditor/Editor.jsx";
 
 const blogDetailsPage = () => {
   const { slug } = useParams();
@@ -70,8 +71,10 @@ console.log("tags", data?.tags )
             <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
-            <div>
-              {body}
+            <div className="w-full">
+              {!isLoading && !isError && (
+                <Editor content={data?.body} editable={false} />
+              )}
             </div>
              <CommentsContainer
               comments={data?.comments}

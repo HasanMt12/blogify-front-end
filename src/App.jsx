@@ -11,6 +11,7 @@ import AdminLayout from './pages/AdminDashboard/AdminLayout'
 import DashboardHome from './pages/AdminDashboard/components/DashboardPages/Dashboardhome'
 import Users from './pages/AdminDashboard/components/DashboardPages/Users'
 import ManagePosts from './pages/AdminDashboard/components/DashboardPages/Posts/ManagePosts'
+import EditPost from './pages/AdminDashboard/components/DashboardPages/Posts/EditPost'
 function App() {
   
   return (
@@ -27,7 +28,7 @@ function App() {
             <Route index element={<DashboardHome />} />
             <Route path="posts/manage" element={<ManagePosts />} />
             <Route path="users" element={<Users />} />
-           
+             <Route path="posts/manage/edit/:slug" element={<EditPost />} />
           </Route>
        
        </Routes>

@@ -1,16 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { images, stables } from "../../../../../constants";
 import { deletePost, getAllPosts } from "../../../../../services/index/blogPosts.js";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Button, Input } from "@nextui-org/react";
+import Pagination from "../../../../../components/Pagination.jsx";
+import PageTwo from "../../../../../components/PageTwo.jsx";
+import DataTable from "react-data-table-component";
 
-let isFirstRun = true;
+// let isFirstRun = true;
 
 const ManagePosts = () => {
-  const queryClient = useQueryClient();
+   const queryClient = useQueryClient();
   const userState = useSelector((state) => state.user);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,13 +46,13 @@ const ManagePosts = () => {
       },
     });
 
-  useEffect(() => {
-    if (isFirstRun) {
-      isFirstRun = false;
-      return;
-    }
-    refetch();
-  }, [refetch, currentPage]);
+  // useEffect(() => {
+  //   if (isFirstRun) {
+  //     isFirstRun = false;
+  //     return;
+  //   }
+  //   refetch();
+  // }, [refetch, currentPage]);
 
   const searchKeywordHandler = (e) => {
     const { value } = e.target;
@@ -66,10 +69,51 @@ const ManagePosts = () => {
     mutateDeletePost({ slug, token });
   };
 
-  return (
+const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // You might want to use refetch instead of getAllPosts directly
+    // depending on your specific use case and how your API is structured
+    refetch({ searchKeyword, currentPage: page });
+  };
+console.log(postsData)
+   const columns = [
+    {
+      name: "title",
+      selector: (row) => row.caption,
+    },
+
+    {
+      name: "title",
+      selector: (row) => row.title,
+      sortable: true,
+    },
+
+   
+    {
+      name: "created at",
+      selector: (row) => row.createdAt,
+      sortable: true,
+    },
+
+  
+ 
+  ];
+
+return (
     <div>
       <h1 className="text-2xl font-semibold">Mange Posts</h1>
-
+       <DataTable
+        columns={columns}
+        data={postsData?.data}
+        fixedHeader
+        pagination
+        // caseInsensitiveSort={caseInsensitiveSort}
+        // progressPending={loading}
+        // progressPending={pending}	
+        selectableRows
+        selectableRowsHighlight
+        // customStyles={customStyles}
+      />
       <div className="w-full px-4 mx-auto">
         <div className="py-8">
           <div className="flex flex-row justify-between items-center w-full mb-1 sm:mb-0">
@@ -223,15 +267,13 @@ const ManagePosts = () => {
                   )}
                 </tbody>
               </table>  
-              {/* {!isLoading && (
-                <Pagination
-                  onPageChange={(page) => setCurrentPage(page)}
-                  currentPage={currentPage}
-                  totalPageCount={JSON.parse(
-                    postsData?.headers?.["x-totalpagecount"]
-                  )}
-                />
-              )} */}
+              
+ <PageTwo
+            totalPageCount={parseInt(postsData?.headers?.["x-totalpagecount"]) || 0}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        
             </div>
           </div>
         </div>
