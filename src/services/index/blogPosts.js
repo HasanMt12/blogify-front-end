@@ -7,6 +7,7 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
       `http://localhost:5000/api/posts?searchKeyword=${searchKeyword}&page=${page}&limit=${limit}`
     );
     console.log("headers",headers)
+    console.log(data)
     return { data, headers };
     
   } catch (error) {
@@ -23,13 +24,38 @@ export const getAllPosts = async (searchKeyword = "", page = 1, limit = 10) => {
 
 export const getSinglePost = async ({ slug }) => {
   try {
-   const { data } = await axios.get(`http://localhost:5000/api/posts/${slug}`); // Send a GET request to retrieve the blog post data
-    return data;                                      // Return the retrieved data
+const encodedSlug = encodeURIComponent(slug);
+const { data } = await axios.get(`http://localhost:5000/api/posts/${encodedSlug}`); // Send a GET request to retrieve the blog post data
+console.log('Response Data:', data);
+ 
+   return data;                                      // Return the retrieved data
   } catch (error) {
    
     if (error.response && error.response.data.message) // Handle errors gracefully
       throw new Error(error.response.data.message);
     throw new Error(error.message);                    // If there's no specific error message in the response, throw a generic error
+  }
+};
+
+// services/index/blogPosts.js
+
+import axios from "axios";
+
+export const createPost = async ({ postData, token }) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/api/posts/create",
+      postData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response?.data?.message || "Failed to create post");
   }
 };
 

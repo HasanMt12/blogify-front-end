@@ -1,5 +1,5 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem} from "@nextui-org/react";
-import { images } from "../constants";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle, Dropdown, DropdownTrigger, Avatar, DropdownMenu, DropdownItem, Image} from "@nextui-org/react";
+import { images, stables } from "../constants";
 import {Link} from "react-router-dom"
 import { FiEdit } from 'react-icons/fi';
 import { useSelector, useDispatch } from "react-redux";
@@ -35,20 +35,22 @@ useEffect(() => {
       console.log(userState?.userInfo)
   return (
   
-    <Navbar  className="bg-transparent rounded-lg font-opensans " >
+    <Navbar  className="bg-transparent rounded-lg font-opensans px-0" >
       <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-3" justify="start">
+      <NavbarContent className="sm:hidden flex" justify="start">
         <NavbarBrand>
-          <Link to="/"> <img src={images.Logo} className="max-w-[34px] max-h-[34px]" alt="mind Space" title="Mind Space - Home"></img></Link>
+          <Link to="/"> <img src={images.Logo} className="w-9 h-9 " alt="mind Space" title="Mind Space - Home"></img></Link>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4 -ml-20" justify="start">
+      <NavbarContent className="hidden sm:flex gap-4 " justify="center">
         <NavbarBrand>
-          <Link to="/"> <img src={images.Logo} className="max-w-[40px] max-h-[40px]" alt="mind Space" title="Mind Space - Home"></img></Link>
+          <Link to="/"> <img src={images.Logo} className="max-w-[50px] min-h-[50px]" alt="mind Space" title="Mind Space - Home"></img>
+                        <p className="text-tiny -ml-1 -mt-1">MIND SPACE</p>
+          </Link>
         </NavbarBrand>
         <NavbarItem>
           <Link to="/" color="foreground" href="#">
@@ -67,17 +69,22 @@ useEffect(() => {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="-mr-20" justify="end">
-        <NavbarItem className="flex items-center justify-center hover:text-cyan-600">
+      <NavbarContent className="" justify={{ sm: 'center', md: 'end', lg: 'end' }}>
+          <Link to="/blog-post" color="foreground" > 
+          <NavbarItem className="flex items-center justify-center md:text-md text-sm hover:text-cyan-600">
             <FiEdit /> write
-         </NavbarItem> 
+          </NavbarItem> </Link> 
         
          {userState?.userInfo?( <Dropdown placement="bottom-end">
           <DropdownTrigger>
-            <Avatar
-              isBordered
-              as="button"
-              className="transition-transform ring-cyan-600"
+            <Image
+              
+              src={
+                userState?.userInfo.avatar
+                  ? stables.UPLOAD_FOLDER_BASE_URL + userState?.userInfo.avatar
+                  : "https://i.ibb.co/0QZCv5C/png-clipart-user-profile-computer-icons-login-user-avatars-monochrome-black.png"
+              }
+              className="transition-transform ring-1 p-[1px] ring-cyan-600 w-8 h-8 md:w-9 md:h-9 cursor-pointer rounded-full"
               size="sm"
             
             />

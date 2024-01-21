@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import  { useState } from "react";
-import {  useParams } from "react-router-dom";
+import {  Link, useParams } from "react-router-dom";
 
 import BreadCrumbs from "../../components/Breadcrumbs.jsx";
 
@@ -67,10 +67,21 @@ console.log("tags", data?.tags )
               }
               alt={data?.title}
             />
-           
+             {data?.categories && data?.categories.map((category) => (
+                <Link
+                  to={`/blog?category=${category.name}`}
+                  key={category._id}
+                  className="text-primary text-sm font-roboto inline-block md:text-base"
+                >
+                  {category.name}
+                </Link>
+              ))}
             <h1 className="text-xl font-medium font-roboto mt-4 text-dark-hard md:text-[26px]">
               {data?.title}
             </h1>
+               <div className="mt-4 flex gap-2">
+            
+            </div>
             <div className="w-full">
               {!isLoading && !isError && (
                 <Editor content={data?.body} editable={false} />

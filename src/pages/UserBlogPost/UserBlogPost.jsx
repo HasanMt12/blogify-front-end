@@ -1,22 +1,22 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import  { useState } from "react";
-import { getSinglePost, updatePost } from "../../../../../services/index/blogPosts.js";
+import { getSinglePost, updatePost } from "../../services/index/blogPosts.js";
 import {  useParams, useNavigate, Link } from "react-router-dom";
 import CreatableSelect from "react-select/creatable";
-import ErrorMessage from "../../../../../components/ErrorMessage/BlogsErrorMessage.jsx";
-import { stables } from "../../../../../constants";
+import ErrorMessage from "../../components/ErrorMessage/BlogsErrorMessage.jsx";
+import { stables } from "../../constants";
 import { HiOutlineCamera } from "react-icons/hi";
 import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
-import Editor from "../../../../../components/TextEditor/Editor.jsx";
-import { getAllCategories } from "../../../../../services/index/BlogCategories.js";
+import Editor from "../../components/TextEditor/Editor.jsx";
+import { getAllCategories } from "../../services/index/BlogCategories.js";
 import {
   categoryToOption,
   filterCategories,
-} from "../../../../../utils/multiSelectorTagUtils.js";
+} from "../../utils/multiSelectorTagUtils.js";
 
-import BlogDetailSkeleton from "../../../../BlogDetails/BlogSetailsKeleton.jsx";
-import MultiSelectTagDropdown from "../../../../../components/dropdown-select/MultiSelectTagDropdown.jsx";
+import BlogDetailSkeleton from "../BlogDetails/BlogSetailsKeleton.jsx";
+import MultiSelectTagDropdown from "../../components/dropdown-select/MultiSelectTagDropdown.jsx";
 
 const promiseOptions = async (inputValue) => {
   const categoriesData = await getAllCategories();
@@ -24,7 +24,9 @@ const promiseOptions = async (inputValue) => {
 };
 
 
-const EditPost = () => {
+
+
+const UserBlogPost = () => {
   const { slug } = useParams();
   const queryClient = useQueryClient();
   const navigate = useNavigate();
@@ -116,7 +118,6 @@ const EditPost = () => {
   };
 
   let isPostDataLoaded = !isLoading && !isError;
-
   return (
     <div>
       {isLoading ? (
@@ -262,7 +263,6 @@ const EditPost = () => {
         </section>
       )}
     </div>
-  );
-};
-
-export default EditPost;
+  )
+}
+export default UserBlogPost;

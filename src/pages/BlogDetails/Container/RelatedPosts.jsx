@@ -1,16 +1,17 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import { images, stables } from "../../../constants";
-
-const RelatedPosts = ({blogs = [], tagsData}) => {
+import { FaPenFancy } from 'react-icons/fa';
+const RelatedPosts = ({blogs = [], tagsData, className}) => {
   console.log(blogs)
   return (
     <div
-      className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 mt-8 lg:mt-0 lg:max-w-xs`}
+      className={`w-full shadow-[rgba(7,_65,_210,_0.1)_0px_9px_30px] rounded-lg p-4 mt-8 lg:mt-0 lg:max-w-xs ${className}`}
     >
-      <h2 className="font-roboto font-medium text-dark-hard md:text-xl">
-       Latest blogs
-      </h2>
+      <div className="flex justify-start items-center gap-1 text-sky-600 mb-5 mt-8">
+        <h1 className="font-semibold font-merriweather text-[#333333]">Latest Blogs __ </h1>
+        <FaPenFancy />
+      </div>
       <div className="grid gap-y-5 mt-5 md:grid-cols-2 md:gap-x-5 lg:grid-cols-1">
        
           {blogs.map((item) => (

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useCallback } from 'react'
 import {
   AiOutlineBold,
@@ -6,17 +5,17 @@ import {
   AiOutlineEnter,
   AiOutlineItalic,
   AiOutlineOrderedList,
-  AiOutlineRedo,
   AiOutlineStrikethrough,
-  AiOutlineUndo,
   AiOutlineUnorderedList,
 } from "react-icons/ai";
+import { BiUndo, BiRedo } from "react-icons/bi";
+import { RiCodeBoxFill } from "react-icons/ri";
+import { FaPencilAlt } from "react-icons/fa";
 import { BiParagraph } from "react-icons/bi";
-import { FiCode } from "react-icons/fi";
 import { MdOutlineLayersClear } from "react-icons/md";
 import { PiCodeBlock, PiQuotes, PiImageSquareBold } from "react-icons/pi";
 import { TbSpacingVertical } from "react-icons/tb";
-
+import "./Menu.css"
 const MenuBar = ({ editor }) => {
   const addImage = useCallback(() => {
     const url = window.prompt('URL')
@@ -33,40 +32,24 @@ const MenuBar = ({ editor }) => {
   return (
     <div className="border border-slate-300 rounded-lg p-5 sticky top-3 left-0 right-0 bg-white z-10 flex gap-0.5 flex-wrap">
       <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={`editor-btn font-black ${editor.isActive("heading", { level: 1 }) && "active-editor-btn"
-          }`}
+      
+      onClick={() => {
+        editor.chain().focus().toggleHeading({ level: 1 }).run();
+      }}
+        className={`editor-btn font-black ${editor.isActive("heading", { level: 1 }) && "active-editor-btn"}`}
       >
         H1
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
+        disabled={!editor.can().chain().focus().toggleItalic().run()}
+      
         className={`editor-btn font-extrabold ${editor.isActive("heading", { level: 2 }) && "active-editor-btn"
           }`}
       >
         H2
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={`editor-btn font-semibold ${editor.isActive("heading", { level: 3 }) && "active-editor-btn"
-          }`}
-      >
-        H3
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={`editor-btn font-medium ${editor.isActive("heading", { level: 4 }) && "active-editor-btn"
-          }`}
-      >
-        H4
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={`editor-btn font-normal ${editor.isActive("heading", { level: 5 }) && "active-editor-btn"
-          }`}
-      >
-        H5
-      </button>
+      
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
         className={`editor-btn font-normal ${editor.isActive("heading", { level: 6 }) && "active-editor-btn"
@@ -98,13 +81,20 @@ const MenuBar = ({ editor }) => {
       >
         <AiOutlineStrikethrough />
       </button>
+
       <button
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={`editor-btn ${editor.isActive("code") && "active-editor-btn"
-          }`}
+       title='toggle code editor or normal text'
+        onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+        className={editor.isActive('codeBlock') ? 'is-active' : ''}
       >
-        <FiCode />
+         <FaPencilAlt />
+      </button>
+      <button
+       title='set code Editor'
+        onClick={() => editor.chain().focus().setCodeBlock().run()}
+        disabled={editor.isActive('codeBlock')}
+      >
+      <RiCodeBoxFill /> 
       </button>
       <button
         onClick={() => editor.chain().focus().unsetAllMarks().run()}
@@ -173,14 +163,14 @@ const MenuBar = ({ editor }) => {
         disabled={!editor.can().chain().focus().undo().run()}
         className={`editor-btn`}
       >
-        <AiOutlineUndo />
+       <BiUndo />
       </button>
       <button
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
         className={`editor-btn`}
       >
-        <AiOutlineRedo />
+        <BiRedo />
       </button>
     </div>
   );

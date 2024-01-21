@@ -12,6 +12,7 @@ import DashboardHome from './pages/AdminDashboard/components/DashboardPages/Dash
 import Users from './pages/AdminDashboard/components/DashboardPages/Users'
 import ManagePosts from './pages/AdminDashboard/components/DashboardPages/Posts/ManagePosts'
 import EditPost from './pages/AdminDashboard/components/DashboardPages/Posts/EditPost'
+import UserBlogPost from './pages/UserBlogPost/UserBlogPost'
 function App() {
   
   return (
@@ -23,7 +24,7 @@ function App() {
            <Route path="/register" element={<RegisterPage />} />
            <Route path="/login" element={<LoginPage />} />
            <Route path="/user-profile" element={<UserProfilePage />} />
-
+           <Route path="/blog-post" element={<UserBlogPost />} />
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<DashboardHome />} />
             <Route path="posts/manage" element={<ManagePosts />} />
